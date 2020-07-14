@@ -25,7 +25,7 @@ import java.util.stream.Stream;
 
 public class GeradorPDF {
 
-    public void geraPDF(Path arquivoDeSaida, Path diretorioDosMD) {
+    public static void geraPDF(Path arquivoDeSaida, Path diretorioDosMD) {
         try(PdfWriter writer = new PdfWriter(Files.newOutputStream(arquivoDeSaida));
             PdfDocument pdf = new PdfDocument(writer);
             Document pdfDocument = new Document(pdf)) {

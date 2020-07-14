@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 
 public class GeradorEPUB {
 
-    public void geraEPUB(Path arquivoDeSaida, Path diretorioDosMD) {
+    public static void geraEPUB(Path arquivoDeSaida, Path diretorioDosMD) {
         Book epub = new Book();
 
         PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:**/*.md");
