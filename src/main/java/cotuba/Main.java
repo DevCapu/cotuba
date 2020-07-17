@@ -1,6 +1,7 @@
 package cotuba;
 
 import java.nio.file.Path;
+import java.util.List;
 
 public class Main {
 
@@ -12,12 +13,19 @@ public class Main {
 		Path arquivoDeSaida = opcoesCLI.getArquivoDeSaida();
 		boolean modoVerboso = opcoesCLI.isModoVerboso();
 
+		RenderizadorMDParaHTML renderizador = new RenderizadorMDParaHTML();
+		List<Capitulo> capitulos = renderizador.renderiza(diretorioDosMD);
+
+		Ebook ebook = new Ebook();
+		ebook.setFormato(formato);
+		ebook.setCapitulos(capitulos);
+
 		try {
 			
 			if ("pdf".equals(formato)) {
-				GeradorPDF.geraPDF(arquivoDeSaida, diretorioDosMD);
+				GeradorPDF.geraPDF(ebook, arquivoDeSaida);
 			} else if ("epub".equals(formato)) {
-				GeradorEPUB.geraEPUB(arquivoDeSaida, diretorioDosMD);
+				GeradorEPUB.geraEPUB(ebook, arquivoDeSaida);
 			} else {
 				throw new RuntimeException("Formato do ebook inválido: " + formato);
 			}
