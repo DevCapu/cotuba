@@ -30,8 +30,10 @@ public class GeradorPDF {
                 for (IElement element : convertToElements) {
                     pdfDocument.add((IBlockElement) element);
                 }
-                // TODO: não adicionar página depois do último capítulo
-                pdfDocument.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
+
+                if (ebook.getCapitulos().iterator().hasNext()) {
+                    pdfDocument.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
+                }
 
             }
 

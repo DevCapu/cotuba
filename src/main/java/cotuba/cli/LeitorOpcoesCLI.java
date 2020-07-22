@@ -20,6 +20,23 @@ class LeitorOpcoesCLI {
     private boolean modoVerboso = false;
 
     public LeitorOpcoesCLI(String [] args) {
+        Options options = criaPossiveisOpcoes();
+
+        CommandLineParser cmdParser = new DefaultParser();
+        CommandLine cmd;
+        try {
+            cmd = cmdParser.parse(options, args);
+        } catch (ParseException e) {
+            throw new RuntimeException("Opção inválida", e);
+        }
+
+        setNomeDoDiretorioDosMD(cmd.getOptionValue("dir"));
+        setFormato(cmd.getOptionValue("format"));
+        setArquivoDeSaida(cmd.getOptionValue("output"));
+        setModoVerboso(cmd.hasOption("verbose"));
+    }
+
+    private Options criaPossiveisOpcoes() {
         Options options = new Options();
 
         Option opcaoDeDiretorioDosMD = new Option("d", "dir", true,
@@ -38,18 +55,10 @@ class LeitorOpcoesCLI {
                 "Habilita modo verboso.");
         options.addOption(opcaoModoVerboso);
 
-        CommandLineParser cmdParser = new DefaultParser();
-        HelpFormatter ajuda = new HelpFormatter();
-        CommandLine cmd;
+        return options;
+    }
 
-        try {
-            cmd = cmdParser.parse(options, args);
-        } catch (ParseException e) {
-            throw new RuntimeException("Opção inválida", e);
-        }
-
-        String nomeDoDiretorioDosMD = cmd.getOptionValue("dir");
-
+    private void setNomeDoDiretorioDosMD(String nomeDoDiretorioDosMD) {
         if (nomeDoDiretorioDosMD != null) {
             diretorioDosMD = Paths.get(nomeDoDiretorioDosMD);
             if (!Files.isDirectory(diretorioDosMD)) {
@@ -59,16 +68,17 @@ class LeitorOpcoesCLI {
             Path diretorioAtual = Paths.get("");
             diretorioDosMD = diretorioAtual;
         }
+    }
 
-        String nomeDoFormatoDoEbook = cmd.getOptionValue("format");
-
+    private void setFormato(String nomeDoFormatoDoEbook) {
         if (nomeDoFormatoDoEbook != null) {
             formato = nomeDoFormatoDoEbook.toLowerCase();
         } else {
             formato = "pdf";
         }
+    }
 
-        String nomeDoArquivoDeSaidaDoEbook = cmd.getOptionValue("output");
+    private void setArquivoDeSaida(String nomeDoArquivoDeSaidaDoEbook) {
         if (nomeDoArquivoDeSaidaDoEbook != null) {
             arquivoDeSaida = Paths.get(nomeDoArquivoDeSaidaDoEbook);
             if (Files.exists(arquivoDeSaida) && Files.isDirectory(arquivoDeSaida)) {
@@ -77,8 +87,10 @@ class LeitorOpcoesCLI {
         } else {
             arquivoDeSaida = Paths.get("book." + formato.toLowerCase());
         }
+    }
 
-        modoVerboso = cmd.hasOption("verbose");
+    private void setModoVerboso(boolean isModoVerboso) {
+        modoVerboso = isModoVerboso;
     }
 
     public Path getDiretorioDosMD() {
