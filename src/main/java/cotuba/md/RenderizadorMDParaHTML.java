@@ -68,7 +68,7 @@ public class RenderizadorMDParaHTML {
         return capitulo;
     }
 
-    public void renderizaCapitulo(Capitulo capitulo, Path arquivoMD) {
+    private void renderizaCapitulo(Capitulo capitulo, Path arquivoMD) {
         try {
             HtmlRenderer renderer = HtmlRenderer.builder().build();
             String html = renderer.render(document);
