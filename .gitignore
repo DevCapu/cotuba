@@ -6,3 +6,8 @@ target
 .settings
 .build/
 
+.idea/
+cotuba-cli.iml
+script_epub.sh
+script_pdf.sh
+
