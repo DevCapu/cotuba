@@ -7,7 +7,7 @@ import java.nio.file.Path;
 public interface GeradorEPUB {
 
     static GeradorEPUB cria() {
-        return new GeradorEPUBImpl();
+        return new GeradorEPUBEpublib();
     }
 
     public void geraEPUB(Ebook ebook, Path arquivoDeSaida);

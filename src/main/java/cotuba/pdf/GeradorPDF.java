@@ -7,7 +7,7 @@ import java.nio.file.Path;
 public interface GeradorPDF {
 
     static GeradorPDF cria() {
-        return new GeradorPDFImpl();
+        return new GeradorPDFIText();
     }
 
     void geraPDF(Ebook ebook, Path arquivoDeSaida);

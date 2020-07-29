@@ -8,7 +8,7 @@ import java.util.List;
 public interface RenderizadorMDParaHTML {
 
     static RenderizadorMDParaHTML cria() {
-        return new RenderizadorMDParaHTMLImpl();
+        return new RenderizadorMDParaHTMLCommonMark();
 
     }
 

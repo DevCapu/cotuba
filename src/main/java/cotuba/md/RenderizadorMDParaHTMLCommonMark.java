@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class RenderizadorMDParaHTMLImpl implements RenderizadorMDParaHTML {
+public class RenderizadorMDParaHTMLCommonMark implements RenderizadorMDParaHTML {
 
     private final List<Capitulo> capitulos = new ArrayList<>();
     private Node document;
