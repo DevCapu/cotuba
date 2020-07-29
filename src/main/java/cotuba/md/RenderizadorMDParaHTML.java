@@ -7,6 +7,11 @@ import java.util.List;
 
 public interface RenderizadorMDParaHTML {
 
+    static RenderizadorMDParaHTML cria() {
+        return new RenderizadorMDParaHTMLImpl();
+
+    }
+
     List<Capitulo> renderiza(Path diretorioDosMD);
 
 }
