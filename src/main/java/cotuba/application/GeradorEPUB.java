@@ -1,6 +1,7 @@
-package cotuba.epub;
+package cotuba.application;
 
 import cotuba.domain.Ebook;
+import cotuba.epub.GeradorEPUBEpublib;
 
 import java.nio.file.Path;
 

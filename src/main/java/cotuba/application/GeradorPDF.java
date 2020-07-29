@@ -1,6 +1,7 @@
-package cotuba.pdf;
+package cotuba.application;
 
 import cotuba.domain.Ebook;
+import cotuba.pdf.GeradorPDFIText;
 
 import java.nio.file.Path;
 
