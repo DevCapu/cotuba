@@ -3,14 +3,14 @@ package cotuba.domain;
 import java.util.List;
 
 public class Ebook {
-    private String formato;
+    private FormatoEbook formato;
     private List<Capitulo> capitulos;
 
-    public String getFormato() {
+    public FormatoEbook getFormato() {
         return formato;
     }
 
-    public void setFormato(String formato) {
+    public void setFormato(FormatoEbook formato) {
         this.formato = formato;
     }
 

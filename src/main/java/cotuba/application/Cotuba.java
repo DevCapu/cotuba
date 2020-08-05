@@ -2,6 +2,7 @@ package cotuba.application;
 
 import cotuba.domain.Capitulo;
 import cotuba.domain.Ebook;
+import cotuba.domain.FormatoEbook;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 public class Cotuba {
 
     public static void executa(ParametrosCotuba parametros) {
-        String formato = parametros.getFormato();
+        FormatoEbook formato = parametros.getFormato();
         Path diretorioDosMD = parametros.getDiretorioDosMD();
         Path arquivoDeSaida = parametros.getArquivoDeSaida();
 

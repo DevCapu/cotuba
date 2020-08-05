@@ -1,21 +1,17 @@
 package cotuba.cli;
 
+import cotuba.application.ParametrosCotuba;
+import cotuba.domain.FormatoEbook;
+import org.apache.commons.cli.*;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import cotuba.application.ParametrosCotuba;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-
 public class LeitorOpcoesCLI implements ParametrosCotuba {
 
     private Path diretorioDosMD;
-    private String formato;
+    private FormatoEbook formato;
     private Path arquivoDeSaida;
     private boolean modoVerboso = false;
 
@@ -72,9 +68,9 @@ public class LeitorOpcoesCLI implements ParametrosCotuba {
 
     private void setFormato(String nomeDoFormatoDoEbook) {
         if (nomeDoFormatoDoEbook != null) {
-            formato = nomeDoFormatoDoEbook.toLowerCase();
+            formato = FormatoEbook.valueOf(nomeDoFormatoDoEbook.toUpperCase());
         } else {
-            formato = "pdf";
+            formato = FormatoEbook.PDF;
         }
     }
 
@@ -85,7 +81,7 @@ public class LeitorOpcoesCLI implements ParametrosCotuba {
                 throw new RuntimeException(nomeDoArquivoDeSaidaDoEbook + " é um diretório.");
             }
         } else {
-            arquivoDeSaida = Paths.get("book." + formato.toLowerCase());
+            arquivoDeSaida = Paths.get("book." + formato.name().toLowerCase());
         }
     }
 
@@ -99,7 +95,7 @@ public class LeitorOpcoesCLI implements ParametrosCotuba {
     }
 
     @Override
-    public String getFormato() {
+    public FormatoEbook getFormato() {
         return formato;
     }
 
