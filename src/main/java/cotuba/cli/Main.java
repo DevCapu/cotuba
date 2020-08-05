@@ -12,15 +12,12 @@ public class Main {
 		boolean modoVerboso = MODO_VERBOSO_DEFAULT;
 
 		try {
-
 			LeitorOpcoesCLI opcoesCLI = new LeitorOpcoesCLI(args);
-			Path diretorioDosMD = opcoesCLI.getDiretorioDosMD();
-			String formato = opcoesCLI.getFormato();
 			Path arquivoDeSaida = opcoesCLI.getArquivoDeSaida();
 			modoVerboso = opcoesCLI.isModoVerboso();
 
 			Cotuba cotuba = new Cotuba();
-			cotuba.executa(formato, diretorioDosMD, arquivoDeSaida);
+			cotuba.executa(opcoesCLI);
 			System.out.println("Arquivo gerado com sucesso: " + arquivoDeSaida);
 
 		} catch (Exception ex) {

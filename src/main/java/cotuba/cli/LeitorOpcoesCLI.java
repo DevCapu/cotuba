@@ -12,7 +12,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-class LeitorOpcoesCLI {
+public class LeitorOpcoesCLI {
 
     private Path diretorioDosMD;
     private String formato;
