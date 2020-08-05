@@ -4,15 +4,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import cotuba.application.ParametrosCotuba;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-public class LeitorOpcoesCLI {
+public class LeitorOpcoesCLI implements ParametrosCotuba {
 
     private Path diretorioDosMD;
     private String formato;
@@ -93,14 +93,17 @@ public class LeitorOpcoesCLI {
         modoVerboso = isModoVerboso;
     }
 
+    @Override
     public Path getDiretorioDosMD() {
         return diretorioDosMD;
     }
 
+    @Override
     public String getFormato() {
         return formato;
     }
 
+    @Override
     public Path getArquivoDeSaida() {
         return arquivoDeSaida;
     }
