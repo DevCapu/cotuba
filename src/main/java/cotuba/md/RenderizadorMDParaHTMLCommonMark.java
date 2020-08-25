@@ -2,6 +2,7 @@ package cotuba.md;
 
 import cotuba.application.RenderizadorMDParaHTML;
 import cotuba.domain.Capitulo;
+import cotuba.tema.AplicadorTema;
 import org.commonmark.node.AbstractVisitor;
 import org.commonmark.node.Heading;
 import org.commonmark.node.Node;
@@ -22,6 +23,7 @@ public class RenderizadorMDParaHTMLCommonMark implements RenderizadorMDParaHTML 
 
     private final List<Capitulo> capitulos = new ArrayList<>();
     private Node document;
+    private AplicadorTema aplicadorTema = new AplicadorTema();
 
     @Override
     public List<Capitulo> renderiza(Path diretorioDosMD) {
@@ -34,7 +36,7 @@ public class RenderizadorMDParaHTMLCommonMark implements RenderizadorMDParaHTML 
                     .forEach(arquivoMD -> {
 
                         Capitulo capitulo = parse(arquivoMD);
-                        renderizaCapitulo(capitulo, arquivoMD);
+                        aplicadorTema.aplica(capitulo);
 
                     });
         } catch (IOException ex) {
@@ -64,22 +66,19 @@ public class RenderizadorMDParaHTMLCommonMark implements RenderizadorMDParaHTML 
                 }
 
             });
+            renderizaCapitulo(capitulo);
         } catch (Exception ex) {
             throw new RuntimeException("Erro ao fazer parse do arquivo " + arquivoMD, ex);
         }
         return capitulo;
     }
 
-    private void renderizaCapitulo(Capitulo capitulo, Path arquivoMD) {
-        try {
+    private void renderizaCapitulo(Capitulo capitulo) {
+
             HtmlRenderer renderer = HtmlRenderer.builder().build();
             String html = renderer.render(document);
 
             capitulo.setConteudoHTML(html);
             capitulos.add(capitulo);
-
-        } catch (Exception ex) {
-            throw new RuntimeException("Erro ao renderizar para HTML o arquivo " + arquivoMD, ex);
-        }
     }
 }
