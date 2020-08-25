@@ -54,14 +54,13 @@ public class RenderizadorMDParaHTMLCommonMark implements RenderizadorMDParaHTML 
             document.accept(new AbstractVisitor() {
                 @Override
                 public void visit(Heading heading) {
-                    if (heading.getLevel() == 1) {
-                        // capítulo
+                    if (ehCapitulo(heading)) {
                         String tituloDoCapitulo = ((Text) heading.getFirstChild()).getLiteral();
                         capitulo.setTitulo(tituloDoCapitulo);
-                    } else if (heading.getLevel() == 2) {
-                        // seção
-                    } else if (heading.getLevel() == 3) {
-                        // título
+                    } else if (ehSecao(heading)) {
+                        // coisas com a seção
+                    } else if (ehTitulo(heading)) {
+                        // coisas com o título
                     }
                 }
 
@@ -71,6 +70,18 @@ public class RenderizadorMDParaHTMLCommonMark implements RenderizadorMDParaHTML 
             throw new RuntimeException("Erro ao fazer parse do arquivo " + arquivoMD, ex);
         }
         return capitulo;
+    }
+
+    private boolean ehTitulo(Heading heading) {
+        return heading.getLevel() == 3;
+    }
+
+    private boolean ehSecao(Heading heading) {
+        return heading.getLevel() == 2;
+    }
+
+    private boolean ehCapitulo(Heading heading) {
+        return heading.getLevel() == 1;
     }
 
     private void renderizaCapitulo(Capitulo capitulo) {
