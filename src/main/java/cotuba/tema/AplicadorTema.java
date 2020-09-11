@@ -1,8 +1,11 @@
 package cotuba.tema;
 
 import cotuba.domain.Capitulo;
+import cotuba.plugin.Plugin;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+
+import java.util.List;
 
 
 public class AplicadorTema {
@@ -11,9 +14,8 @@ public class AplicadorTema {
 
         Document document = Jsoup.parse(html);
 
-        String css = "h1 { border-bottom: 1px dashed black; }";
-
-        document.select("head").append("<style> " + css + " </style>");
+        List<String> listaDeTemas = Plugin.listaDeTemas();
+        listaDeTemas.forEach((css) -> document.select("head").append("<style> " + css + " </style>"));
 
         capitulo.setConteudoHTML(document.html());
     }
